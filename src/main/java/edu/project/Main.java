@@ -1,4 +1,4 @@
-package edu.hw1;
+package edu.project;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +21,7 @@ public final class Main {
 
             // Press Shift+F9 to start debugging your code. We have set one breakpoint
             // for you, but you can always add more by pressing Ctrl+F8.
-            LOGGER.info("i = {}", i);
+            LOGGER.info("i = {}", i + 15);
         }
     }
 }
