@@ -13,49 +13,48 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class Task6Test {
 
-    private StockMarket moscowExchange;
+    private StockMarket birge;
 
-    @BeforeEach
-    private void initStockMarket() {
-        moscowExchange = new Birge();
-        moscowExchange.add(new Stock("$SBER", 300));
-        moscowExchange.add(new Stock("$TCSG", 3600));
-        moscowExchange.add(new Stock("$GAZP", 170));
+    @BeforeEach public void init() {
+        birge = new Birge();
+        birge.add(new Stock("ABOBA", 3000));
+        birge.add(new Stock("KEK", 3600));
+        birge.add(new Stock("CHEBUREK", 170));
     }
 
     @Test
-    @DisplayName("#remove test")
-    public void stock_shouldRemoveGivenStockFromStockMarket() {
-        moscowExchange.remove(new Stock("$TCSG", 3600));
-        assertThat(moscowExchange.mostValuableStock())
+    @DisplayName("remove")
+    public void test1() {
+        birge.remove(new Stock("KEK", 3600));
+        assertThat(birge.mostValuableStock())
             .extracting("ticker", "price")
-            .containsExactly("$SBER", 300d);
+            .containsExactly("ABOBA", 3000d);
     }
 
     @Test
-    @DisplayName("#getMostValuableStock test")
-    public void stockMarket_shouldReturnTheMostValuableStock() {
-        assertThat(moscowExchange.mostValuableStock())
+    @DisplayName("mostValuable")
+    public void test2() {
+        assertThat(birge.mostValuableStock())
             .extracting("ticker", "price")
-            .containsExactly("$TCSG", 3600d);
+            .containsExactly("KEK", 3600d);
     }
 
     @Test
-    @DisplayName("#add test")
-    public void stock_shouldAddGivenStockToStockMarket() {
-        moscowExchange.add(new Stock("$TRNFP", 147400));
-        assertThat(moscowExchange.mostValuableStock())
+    @DisplayName("add")
+    public void test3() {
+        birge.add(new Stock("TEST", 10000));
+        assertThat(birge.mostValuableStock())
             .extracting("ticker", "price")
-            .containsExactly("$TRNFP", 147400d);
+            .containsExactly("TEST", 10000d);
     }
 
     @ParameterizedTest
     @NullSource
-    @DisplayName("Null test for #add and #remove")
+    @DisplayName("Null test")
     public void stock_shouldThrowException_whenStockIsNull(Stock testStock) {
         org.junit.jupiter.api.Assertions.assertAll(
-            () -> assertThatThrownBy(() -> moscowExchange.remove(testStock)).isInstanceOf(IllegalArgumentException.class),
-            () -> assertThatThrownBy(() -> moscowExchange.add(testStock)).isInstanceOf(IllegalArgumentException.class)
+            () -> assertThatThrownBy(() -> birge.remove(testStock)).isInstanceOf(IllegalArgumentException.class),
+            () -> assertThatThrownBy(() -> birge.add(testStock)).isInstanceOf(IllegalArgumentException.class)
         );
     }
 }

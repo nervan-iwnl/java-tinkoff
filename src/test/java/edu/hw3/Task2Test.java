@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class Task2Test {
 
-    private static Stream<Arguments> basicTestsInputs() {
+    private static Stream<Arguments> test() {
         return Stream.of(
             Arguments.of("()()()", new String[] {"()", "()", "()"}),
             Arguments.of("((()))", new String[] {"((()))"}),
@@ -22,17 +22,17 @@ public class Task2Test {
     }
 
     @ParameterizedTest
-    @MethodSource("basicTestsInputs")
-    @DisplayName("Basic tests for #clusterize")
-    public void bracketsLine_shouldReturnListOfBalancedBracketsClusters(String testBracketLine, String[] expected) {
+    @MethodSource("test")
+    @DisplayName("Basic tests")
+    public void test1(String testBracketLine, String[] expected) {
         String[] actual = Task2.clusterize(testBracketLine).toArray(new String[0]);
         assertThat(actual).isEqualTo(expected);
     }
 
     @NullAndEmptySource
     @ParameterizedTest
-    @DisplayName("Null and empty test for #clusterize")
-    public void bracketsLine_shouldThrowException_whenBracketsLineIsNullOrEmpty(String testBracketLine) {
+    @DisplayName("Null and empty test")
+    public void test2(String testBracketLine) {
         assertThatThrownBy(() -> Task2.clusterize(testBracketLine)).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,8 +41,8 @@ public class Task2Test {
         "(((()",
         "(())d()"
     })
-    @DisplayName("Wrong input test for #clusterize")
-    public void bracketsLine_shouldThrowException_whenBracketsLinesIsIncorrect(String testBracketLine) {
+    @DisplayName("Wrong input test")
+    public void test3(String testBracketLine) {
         assertThatThrownBy(() -> Task2.clusterize(testBracketLine)).isInstanceOf(IllegalArgumentException.class);
     }
 }

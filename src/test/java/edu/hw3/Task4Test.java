@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class Task4Test {
 
-    private static Stream<Arguments> basicTestsInputs() {
+    private static Stream<Arguments> test() {
         return Stream.of(
             Arguments.of(2, "II"),
             Arguments.of(12, "XII"),
@@ -21,9 +21,9 @@ public class Task4Test {
     }
 
     @ParameterizedTest
-    @MethodSource("basicTestsInputs")
-    @DisplayName("Basic tests for #convertToRoman")
-    public void number_shouldReturnConvertedToRomanNumber(int testNumber, String expected) {
+    @MethodSource("test")
+    @DisplayName("Basic tests")
+    public void test1(int testNumber, String expected) {
         String actual = Task4.convertToRoman(testNumber);
         assertThat(actual).isEqualTo(expected);
     }
@@ -34,8 +34,8 @@ public class Task4Test {
         "-1",
         "4500"
     })
-    @DisplayName("Wrong input tests for #convertToRoman")
-    public void number_shouldThrowException_whenInputIsIncorrect(int testNumber) {
+    @DisplayName("Wrong input tests")
+    public void test2(int testNumber) {
         assertThatThrownBy(() -> Task4.convertToRoman(testNumber)).isInstanceOf(IllegalArgumentException.class);
     }
 }

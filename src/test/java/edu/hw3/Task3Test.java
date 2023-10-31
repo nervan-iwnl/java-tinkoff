@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class Task3Test {
 
-    private static Stream<Arguments> basicTestsInputs() {
+    private static Stream<Arguments> test() {
         return Stream.of(
             Arguments.of(List.of("a", "bb", "a", "bb"), Map.of("bb", 2L, "a", 2L)),
             Arguments.of(List.of("this", "and", "that", "and"), Map.of("that", 1L, "and", 2L, "this", 1L)),
@@ -22,17 +22,17 @@ public class Task3Test {
     }
 
     @ParameterizedTest
-    @MethodSource("basicTestsInputs")
-    @DisplayName("Basic tests for #getFrequencyDictionary")
-    public <T> void list_shouldReturnFrequencyDictionaryOfItsElements(List<T> testList, Map<T, Long> expected) {
+    @MethodSource("test")
+    @DisplayName("Basic tests")
+    public <T> void test1(List<T> testList, Map<T, Long> expected) {
         Map<T, Long> actual = Task3.getFrequencyDictionary(testList);
         assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Null and empty test for #getFrequencyDictionary")
-    public <T> void list_shouldThrowException_whenListIsEmptyOrNull(List<T> testList) {
+    @DisplayName("Null and empty")
+    public <T> void test2(List<T> testList) {
         assertThatThrownBy(() -> Task3.getFrequencyDictionary(testList)).isInstanceOf(IllegalArgumentException.class);
     }
 }

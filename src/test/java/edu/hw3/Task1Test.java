@@ -16,7 +16,7 @@ public class Task1Test {
             + "Zmb ullo xzm dirgv xlwv gszg z xlnkfgvi xzm fmwvihgzmw. Tllw kiltiznnvih dirgv xlwv gszg sfnzmh xzm fmwvihgzmw. ― Nzigrm Uldovi"
     })
     @DisplayName("default tests")
-    public void message_shouldReturnEncodedWithAbashMessage(String testMessage, String expected) {
+    public void test1(String testMessage, String expected) {
         String actual = Task1.encodeWithAtbash(testMessage);
         assertThat(actual).isEqualTo(expected);
     }
@@ -24,13 +24,13 @@ public class Task1Test {
     @NullAndEmptySource
     @ParameterizedTest
     @DisplayName("null and empty test")
-    public void message_shouldThrowException_whenMessageIsNullOrEmpty(String message) {
+    public void test2(String message) {
         assertThatThrownBy(() -> Task1.encodeWithAtbash(message)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("unicode & not Latin symbols test")
-    public void message_shouldReturnEncodedWithAbashMessageWhereOnlyAsciiLatinLetterAreEncoded() {
+    public void test3() {
         String testMessage = "Лол кек чебурек!❤\uD83D\uDE0E";
         String actual = Task1.encodeWithAtbash(testMessage);
         assertThat(actual).isEqualTo("Лол кек чебурек!❤\uD83D\uDE0E");

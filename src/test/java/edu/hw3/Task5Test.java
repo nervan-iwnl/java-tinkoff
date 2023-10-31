@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class Task5Test {
 
-    private static Stream<Arguments> basicTestInputs() {
+    private static Stream<Arguments> test() {
         return Stream.of(
             Arguments.of(
                 new String[] {"John Locke", "Thomas Aquinas", "David Hume", "Rene Descartes"},
@@ -36,7 +36,7 @@ public class Task5Test {
         );
     }
 
-    private static Stream<Arguments> invalidTestInputs() {
+    private static Stream<Arguments> test2() {
         return Stream.of(
             Arguments.of((Object) new String[] {"Dmitriy Gavrilov Sergeevich"}),
             Arguments.of((Object) new String[] {"Isaac Asim0v"}),
@@ -45,9 +45,9 @@ public class Task5Test {
     }
 
     @ParameterizedTest
-    @MethodSource("basicTestInputs")
-    @DisplayName("Basic tests for #parseContacts")
-    public void arrayOfPeopleInfo_shouldReturnSortedListOfContacts(
+    @MethodSource("test")
+    @DisplayName("Basic tests")
+    public void test1(
         String[] testPeopleInfo,
         String sortOrder,
         List<Contact> expected
@@ -58,8 +58,8 @@ public class Task5Test {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Null and empty test for #parseContacts")
-    public void arrayOfPeopleInfo_shouldReturnEmptyList_whenArrayIsNullOrEmpty(String[] testPeopleInfo) {
+    @DisplayName("Null and empty test")
+    public void test2(String[] testPeopleInfo) {
         List<Contact> actual = Main.parseContacts(testPeopleInfo, "ASC");
         assertThat(actual).isEqualTo(Collections.emptyList());
     }
